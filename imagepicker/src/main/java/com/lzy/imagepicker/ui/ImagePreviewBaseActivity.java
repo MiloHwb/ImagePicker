@@ -18,20 +18,20 @@ import java.util.ArrayList;
 
 /**
  * ================================================
- * ×÷    Õß£ºjeasonlzy£¨ÁÎ×ÓÒ¢ GithubµØÖ·£ºhttps://github.com/jeasonlzy0216
- * °æ    ±¾£º1.0
- * ´´½¨ÈÕÆÚ£º2016/5/19
- * Ãè    Êö£º
- * ĞŞ¶©ÀúÊ·£ºÍ¼Æ¬Ô¤ÀÀµÄ»ùÀà
+ * ä½œ    è€…ï¼šjeasonlzyï¼ˆå»–å­å°§ Githubåœ°å€ï¼šhttps://github.com/jeasonlzy0216
+ * ç‰ˆ    æœ¬ï¼š1.0
+ * åˆ›å»ºæ—¥æœŸï¼š2016/5/19
+ * æ    è¿°ï¼š
+ * ä¿®è®¢å†å²ï¼šå›¾ç‰‡é¢„è§ˆçš„åŸºç±»
  * ================================================
  */
 public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
 
     protected ImagePicker imagePicker;
-    protected ArrayList<ImageItem> mImageItems;      //Ìø×ª½øImagePreviewFragmentµÄÍ¼Æ¬ÎÄ¼ş¼Ğ
-    protected int mCurrentPosition = 0;              //Ìø×ª½øImagePreviewFragmentÊ±µÄĞòºÅ£¬µÚ¼¸¸öÍ¼Æ¬
-    protected TextView mTitleCount;                  //ÏÔÊ¾µ±Ç°Í¼Æ¬µÄÎ»ÖÃ  ÀıÈç  5/31
-    protected ArrayList<ImageItem> selectedImages;   //ËùÓĞÒÑ¾­Ñ¡ÖĞµÄÍ¼Æ¬
+    protected ArrayList<ImageItem> mImageItems;      //è·³è½¬è¿›ImagePreviewFragmentçš„å›¾ç‰‡æ–‡ä»¶å¤¹
+    protected int mCurrentPosition = 0;              //è·³è½¬è¿›ImagePreviewFragmentæ—¶çš„åºå·ï¼Œç¬¬å‡ ä¸ªå›¾ç‰‡
+    protected TextView mTitleCount;                  //æ˜¾ç¤ºå½“å‰å›¾ç‰‡çš„ä½ç½®  ä¾‹å¦‚  5/31
+    protected ArrayList<ImageItem> selectedImages;   //æ‰€æœ‰å·²ç»é€‰ä¸­çš„å›¾ç‰‡
     protected View content;
     protected View topBar;
     protected ViewPagerFixed mViewPager;
@@ -47,20 +47,20 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
         isFromItems = getIntent().getBooleanExtra(ImagePicker.EXTRA_FROM_ITEMS, false);
 
         if (isFromItems) {
-            // ¾İËµÕâÑù»áµ¼ÖÂ´óÁ¿Í¼Æ¬±ÀÀ£
+            // æ®è¯´è¿™æ ·ä¼šå¯¼è‡´å¤§é‡å›¾ç‰‡å´©æºƒ
             mImageItems = (ArrayList<ImageItem>) getIntent().getSerializableExtra(ImagePicker.EXTRA_IMAGE_ITEMS);
         } else {
-            // ÏÂÃæ²ÉÓÃÈõÒıÓÃ»áµ¼ÖÂÔ¤ÀÀ±ÀÀ£
+            // ä¸‹é¢é‡‡ç”¨å¼±å¼•ç”¨ä¼šå¯¼è‡´é¢„è§ˆå´©æºƒ
             mImageItems = (ArrayList<ImageItem>) DataHolder.getInstance().retrieve(DataHolder.DH_CURRENT_IMAGE_FOLDER_ITEMS);
         }
 
         imagePicker = ImagePicker.getInstance();
         selectedImages = imagePicker.getSelectedImages();
 
-        //³õÊ¼»¯¿Ø¼ş
+        //åˆå§‹åŒ–æ§ä»¶
         content = findViewById(R.id.content);
 
-        //ÒòÎª×´Ì¬À¸Í¸Ã÷ºó£¬²¼¾ÖÕûÌå»áÉÏÒÆ£¬ËùÒÔ¸øÍ·²¿¼ÓÉÏ×´Ì¬À¸µÄmarginÖµ£¬±£Ö¤Í·²¿²»»á±»¸²¸Ç
+        //å› ä¸ºçŠ¶æ€æ é€æ˜åï¼Œå¸ƒå±€æ•´ä½“ä¼šä¸Šç§»ï¼Œæ‰€ä»¥ç»™å¤´éƒ¨åŠ ä¸ŠçŠ¶æ€æ çš„marginå€¼ï¼Œä¿è¯å¤´éƒ¨ä¸ä¼šè¢«è¦†ç›–
         topBar = findViewById(R.id.top_bar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) topBar.getLayoutParams();
@@ -88,11 +88,11 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(mCurrentPosition, false);
 
-        //³õÊ¼»¯µ±Ç°Ò³ÃæµÄ×´Ì¬
+        //åˆå§‹åŒ–å½“å‰é¡µé¢çš„çŠ¶æ€
         mTitleCount.setText(getString(R.string.ip_preview_image_count, mCurrentPosition + 1, mImageItems.size()));
     }
 
-    /** µ¥»÷Ê±£¬Òş²ØÍ·ºÍÎ² */
+    /** å•å‡»æ—¶ï¼Œéšè—å¤´å’Œå°¾ */
     public abstract void onImageSingleTap();
 
     @Override

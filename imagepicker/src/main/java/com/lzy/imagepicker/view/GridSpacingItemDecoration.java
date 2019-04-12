@@ -7,7 +7,7 @@ import android.view.View;
 /**
  * author : zchu
  * date   : 2017/8/30
- * desc   : ÎªRecyclerview µÄGridLayoutManagerÌí¼ÓÁĞ¼ä¾à
+ * desc   : ä¸ºRecyclerview çš„GridLayoutManageræ·»åŠ åˆ—é—´è·
  */
 
 public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {

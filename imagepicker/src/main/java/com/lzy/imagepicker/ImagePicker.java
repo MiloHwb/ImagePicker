@@ -32,15 +32,15 @@ import java.util.Locale;
 
 /**
  * ================================================
- * ×÷    Õß£ºjeasonlzy£¨ÁÎ×ÓÒ¢ GithubµØÖ·£ºhttps://github.com/jeasonlzy0216
- * °æ    ±¾£º1.0
- * ´´½¨ÈÕÆÚ£º2016/5/19
- * Ãè    Êö£ºÍ¼Æ¬Ñ¡ÔñµÄÈë¿ÚÀà
- * ĞŞ¶©ÀúÊ·£º
+ * ä½œ    è€…ï¼šjeasonlzyï¼ˆå»–å­å°§ Githubåœ°å€ï¼šhttps://github.com/jeasonlzy0216
+ * ç‰ˆ    æœ¬ï¼š1.0
+ * åˆ›å»ºæ—¥æœŸï¼š2016/5/19
+ * æ    è¿°ï¼šå›¾ç‰‡é€‰æ‹©çš„å…¥å£ç±»
+ * ä¿®è®¢å†å²ï¼š
  * 2017-03-20
  *
  * @author nanchen
- * ²ÉÓÃµ¥ÀıºÍÈõÒıÓÃ½â¾öIntent´«ÖµÏŞÖÆµ¼ÖÂµÄÒì³£
+ * é‡‡ç”¨å•ä¾‹å’Œå¼±å¼•ç”¨è§£å†³Intentä¼ å€¼é™åˆ¶å¯¼è‡´çš„å¼‚å¸¸
  * ================================================
  */
 public class ImagePicker {
@@ -57,27 +57,27 @@ public class ImagePicker {
     public static final String EXTRA_IMAGE_ITEMS = "extra_image_items";
     public static final String EXTRA_FROM_ITEMS = "extra_from_items";
 
-    private boolean multiMode = true;    //Í¼Æ¬Ñ¡ÔñÄ£Ê½
-    private int selectLimit = 9;         //×î´óÑ¡ÔñÍ¼Æ¬ÊıÁ¿
-    private boolean crop = true;         //²Ã¼ô
-    private boolean showCamera = true;   //ÏÔÊ¾Ïà»ú
-    private boolean isSaveRectangle = false;  //²Ã¼ôºóµÄÍ¼Æ¬ÊÇ·ñÊÇ¾ØĞÎ£¬·ñÕß¸úËæ²Ã¼ô¿òµÄĞÎ×´
-    private int outPutX = 800;           //²Ã¼ô±£´æ¿í¶È
-    private int outPutY = 800;           //²Ã¼ô±£´æ¸ß¶È
-    private int focusWidth = 280;         //½¹µã¿òµÄ¿í¶È
-    private int focusHeight = 280;        //½¹µã¿òµÄ¸ß¶È
-    private ImageLoader imageLoader;     //Í¼Æ¬¼ÓÔØÆ÷
-    private CropImageView.Style style = CropImageView.Style.RECTANGLE; //²Ã¼ô¿òµÄĞÎ×´
+    private boolean multiMode = true;    //å›¾ç‰‡é€‰æ‹©æ¨¡å¼
+    private int selectLimit = 9;         //æœ€å¤§é€‰æ‹©å›¾ç‰‡æ•°é‡
+    private boolean crop = true;         //è£å‰ª
+    private boolean showCamera = true;   //æ˜¾ç¤ºç›¸æœº
+    private boolean isSaveRectangle = false;  //è£å‰ªåçš„å›¾ç‰‡æ˜¯å¦æ˜¯çŸ©å½¢ï¼Œå¦è€…è·Ÿéšè£å‰ªæ¡†çš„å½¢çŠ¶
+    private int outPutX = 800;           //è£å‰ªä¿å­˜å®½åº¦
+    private int outPutY = 800;           //è£å‰ªä¿å­˜é«˜åº¦
+    private int focusWidth = 280;         //ç„¦ç‚¹æ¡†çš„å®½åº¦
+    private int focusHeight = 280;        //ç„¦ç‚¹æ¡†çš„é«˜åº¦
+    private ImageLoader imageLoader;     //å›¾ç‰‡åŠ è½½å™¨
+    private CropImageView.Style style = CropImageView.Style.RECTANGLE; //è£å‰ªæ¡†çš„å½¢çŠ¶
     private File cropCacheFolder;
     private File takeImageFile;
 
-    //ÉèÖÃ×ÔÓÉ²Ã¼ôÊ±µÄÄ£Ê½£¬Ä¬ÈÏ×ÔÓÉÄ£Ê½
+    //è®¾ç½®è‡ªç”±è£å‰ªæ—¶çš„æ¨¡å¼ï¼Œé»˜è®¤è‡ªç”±æ¨¡å¼
     public FreeCropImageView.CropMode mFreeCropMode = com.isseiaoki.simplecropview.FreeCropImageView.CropMode.FREE;
-    public boolean isFreeCrop = false;//ÊÇ·ñ¿ªÆô×ÔÓÉ²Ã¼ôÄ£Ê½£¬ÓëÔ­À´µÄ²Ã¼ôÄ£Ê½½øĞĞÇø·Ö
-    private ArrayList<ImageItem> mSelectedImages = new ArrayList<>();   //Ñ¡ÖĞµÄÍ¼Æ¬¼¯ºÏ
-    private List<ImageFolder> mImageFolders;      //ËùÓĞµÄÍ¼Æ¬ÎÄ¼ş¼Ğ
-    private int mCurrentImageFolderPosition = 0;  //µ±Ç°Ñ¡ÖĞµÄÎÄ¼ş¼ĞÎ»ÖÃ 0±íÊ¾ËùÓĞÍ¼Æ¬
-    private List<OnImageSelectedListener> mImageSelectedListeners;          // Í¼Æ¬Ñ¡ÖĞµÄ¼àÌı»Øµ÷
+    public boolean isFreeCrop = false;//æ˜¯å¦å¼€å¯è‡ªç”±è£å‰ªæ¨¡å¼ï¼Œä¸åŸæ¥çš„è£å‰ªæ¨¡å¼è¿›è¡ŒåŒºåˆ†
+    private ArrayList<ImageItem> mSelectedImages = new ArrayList<>();   //é€‰ä¸­çš„å›¾ç‰‡é›†åˆ
+    private List<ImageFolder> mImageFolders;      //æ‰€æœ‰çš„å›¾ç‰‡æ–‡ä»¶å¤¹
+    private int mCurrentImageFolderPosition = 0;  //å½“å‰é€‰ä¸­çš„æ–‡ä»¶å¤¹ä½ç½® 0è¡¨ç¤ºæ‰€æœ‰å›¾ç‰‡
+    private List<OnImageSelectedListener> mImageSelectedListeners;          // å›¾ç‰‡é€‰ä¸­çš„ç›‘å¬å›è°ƒ
 
     private static ImagePicker mInstance;
 
@@ -254,7 +254,7 @@ public class ImagePicker {
     }
 
     /**
-     * ÅÄÕÕµÄ·½·¨
+     * æ‹ç…§çš„æ–¹æ³•
      */
     public void takePicture(Activity activity, int requestCode) {
         PackageManager packageManager = activity.getPackageManager();
@@ -270,10 +270,10 @@ public class ImagePicker {
             else takeImageFile = Environment.getDataDirectory();
             takeImageFile = createFile(takeImageFile, "IMG_", ".jpg");
             if (takeImageFile != null) {
-                // Ä¬ÈÏÇé¿öÏÂ£¬¼´²»ĞèÒªÖ¸¶¨intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                // ÕÕÏà»úÓĞ×Ô¼ºÄ¬ÈÏµÄ´æ´¢Â·¾¶£¬ÅÄÉãµÄÕÕÆ¬½«·µ»ØÒ»¸öËõÂÔÍ¼¡£Èç¹ûÏë·ÃÎÊÔ­Ê¼Í¼Æ¬£¬
-                // ¿ÉÒÔÍ¨¹ıdat extraÄÜ¹»µÃµ½Ô­Ê¼Í¼Æ¬Î»ÖÃ¡£¼´£¬Èç¹ûÖ¸¶¨ÁËÄ¿±êuri£¬data¾ÍÃ»ÓĞÊı¾İ£¬
-                // Èç¹ûÃ»ÓĞÖ¸¶¨uri£¬Ôòdata¾Í·µ»ØÓĞÊı¾İ£¡
+                // é»˜è®¤æƒ…å†µä¸‹ï¼Œå³ä¸éœ€è¦æŒ‡å®šintent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                // ç…§ç›¸æœºæœ‰è‡ªå·±é»˜è®¤çš„å­˜å‚¨è·¯å¾„ï¼Œæ‹æ‘„çš„ç…§ç‰‡å°†è¿”å›ä¸€ä¸ªç¼©ç•¥å›¾ã€‚å¦‚æœæƒ³è®¿é—®åŸå§‹å›¾ç‰‡ï¼Œ
+                // å¯ä»¥é€šè¿‡dat extraèƒ½å¤Ÿå¾—åˆ°åŸå§‹å›¾ç‰‡ä½ç½®ã€‚å³ï¼Œå¦‚æœæŒ‡å®šäº†ç›®æ ‡uriï¼Œdataå°±æ²¡æœ‰æ•°æ®ï¼Œ
+                // å¦‚æœæ²¡æœ‰æŒ‡å®šuriï¼Œåˆ™dataå°±è¿”å›æœ‰æ•°æ®ï¼
 
                 Uri uri;
                 if (VERSION.SDK_INT <= VERSION_CODES.M) {
@@ -281,11 +281,11 @@ public class ImagePicker {
                 } else {
 
                     /**
-                     * 7.0 µ÷ÓÃÏµÍ³Ïà»úÅÄÕÕ²»ÔÙÔÊĞíÊ¹ÓÃUri·½Ê½£¬Ó¦¸ÃÌæ»»ÎªFileProvider
-                     * ²¢ÇÒÕâÑù¿ÉÒÔ½â¾öMIUIÏµÍ³ÉÏÅÄÕÕ·µ»ØsizeÎª0µÄÇé¿ö
+                     * 7.0 è°ƒç”¨ç³»ç»Ÿç›¸æœºæ‹ç…§ä¸å†å…è®¸ä½¿ç”¨Uriæ–¹å¼ï¼Œåº”è¯¥æ›¿æ¢ä¸ºFileProvider
+                     * å¹¶ä¸”è¿™æ ·å¯ä»¥è§£å†³MIUIç³»ç»Ÿä¸Šæ‹ç…§è¿”å›sizeä¸º0çš„æƒ…å†µ
                      */
                     uri = FileProvider.getUriForFile(activity, ProviderUtil.getFileProviderName(activity), takeImageFile);
-                    //¼ÓÈëuriÈ¨ÏŞ Òª²»ÈıĞÇÊÖ»ú²»ÄÜÅÄÕÕ
+                    //åŠ å…¥uriæƒé™ è¦ä¸ä¸‰æ˜Ÿæ‰‹æœºä¸èƒ½æ‹ç…§
                     List<ResolveInfo> resInfoList = activity.getPackageManager().queryIntentActivities(takePictureIntent, PackageManager.MATCH_DEFAULT_ONLY);
                     for (ResolveInfo resolveInfo : resInfoList) {
                         String packageName = resolveInfo.activityInfo.packageName;
@@ -301,7 +301,7 @@ public class ImagePicker {
     }
 
     /**
-     * ¸ù¾İÏµÍ³Ê±¼ä¡¢Ç°×º¡¢ºó×º²úÉúÒ»¸öÎÄ¼ş
+     * æ ¹æ®ç³»ç»Ÿæ—¶é—´ã€å‰ç¼€ã€åç¼€äº§ç”Ÿä¸€ä¸ªæ–‡ä»¶
      */
     public static File createFile(File folder, String prefix, String suffix) {
         if (!folder.exists() || !folder.isDirectory()) folder.mkdirs();
@@ -311,7 +311,7 @@ public class ImagePicker {
     }
 
     /**
-     * É¨ÃèÍ¼Æ¬
+     * æ‰«æå›¾ç‰‡
      */
     public static void galleryAddPic(Context context, File file) {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
@@ -321,7 +321,7 @@ public class ImagePicker {
     }
 
     /**
-     * Í¼Æ¬Ñ¡ÖĞµÄ¼àÌı
+     * å›¾ç‰‡é€‰ä¸­çš„ç›‘å¬
      */
     public interface OnImageSelectedListener {
         void onImageSelected(int position, ImageItem item, boolean isAdd);
@@ -358,7 +358,7 @@ public class ImagePicker {
     }
 
     /**
-     * ÓÃÓÚÊÖ»úÄÚ´æ²»×ã£¬½ø³Ì±»ÏµÍ³»ØÊÕ£¬ÖØÆôÊ±µÄ×´Ì¬»Ö¸´
+     * ç”¨äºæ‰‹æœºå†…å­˜ä¸è¶³ï¼Œè¿›ç¨‹è¢«ç³»ç»Ÿå›æ”¶ï¼Œé‡å¯æ—¶çš„çŠ¶æ€æ¢å¤
      */
     public void restoreInstanceState(Bundle savedInstanceState) {
         cropCacheFolder = (File) savedInstanceState.getSerializable("cropCacheFolder");
@@ -377,7 +377,7 @@ public class ImagePicker {
     }
 
     /**
-     * ÓÃÓÚÊÖ»úÄÚ´æ²»×ã£¬½ø³Ì±»ÏµÍ³»ØÊÕÊ±µÄ×´Ì¬±£´æ
+     * ç”¨äºæ‰‹æœºå†…å­˜ä¸è¶³ï¼Œè¿›ç¨‹è¢«ç³»ç»Ÿå›æ”¶æ—¶çš„çŠ¶æ€ä¿å­˜
      */
     public void saveInstanceState(Bundle outState) {
         outState.putSerializable("cropCacheFolder", cropCacheFolder);
@@ -396,7 +396,7 @@ public class ImagePicker {
     }
 
 
-    //ÉèÖÃÄÚ²¿toastÕ¹Ê¾·ç¸ñ
+    //è®¾ç½®å†…éƒ¨toastå±•ç¤ºé£æ ¼
     public void setIToaster(Context aContext, InnerToaster.IToaster aIToaster) {
         InnerToaster.obj(aContext).setIToaster(aIToaster);
     }

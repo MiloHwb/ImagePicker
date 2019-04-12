@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 /**
- * ĞÂµÄDataHolder£¬Ê¹ÓÃµ¥ÀıºÍÈõÒıÓÃ½â¾ö±ÀÀ£ÎÊÌâ
+ * æ–°çš„DataHolderï¼Œä½¿ç”¨å•ä¾‹å’Œå¼±å¼•ç”¨è§£å†³å´©æºƒé—®é¢˜
  * <p>
  * Author: nanchen
  * Email: liushilin520@foxmail.com
@@ -43,7 +43,7 @@ public class DataHolder {
 
     public Object retrieve(String id) {
         if (data == null || mInstance == null){
-            throw new RuntimeException("Äã±ØĞëÏÈ³õÊ¼»¯");
+            throw new RuntimeException("ä½ å¿…é¡»å…ˆåˆå§‹åŒ–");
         }
         return data.get(id);
     }

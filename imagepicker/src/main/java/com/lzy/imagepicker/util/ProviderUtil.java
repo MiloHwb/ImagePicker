@@ -3,7 +3,7 @@ package com.lzy.imagepicker.util;
 import android.content.Context;
 
 /**
- * 用于解决provider冲突的util
+ * 鐢ㄤ簬瑙ｅ喅provider鍐茬獊鐨剈til
  *
  * Author: nanchen
  * Email: liushilin520@foxmail.com

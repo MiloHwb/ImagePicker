@@ -4,16 +4,16 @@ import android.content.Context;
 import android.widget.Toast;
 
 /**
- * Íâ²¿×¢ÈëtoastÕ¹Ê¾£¬ÒÔ·ûºÏappµÄÉè¼Æ·ç¸ñ
+ * å¤–éƒ¨æ³¨å…¥toastå±•ç¤ºï¼Œä»¥ç¬¦åˆappçš„è®¾è®¡é£æ ¼
  */
 public class InnerToaster {
 
 
     public interface IToaster {
-        //ÌáÊ¾msg
+        //æç¤ºmsg
         void show(String msg);
 
-        //ÌáÊ¾resId×ÊÔ´¶ÔÓ¦µÄ×Ö·û´®
+        //æç¤ºresIdèµ„æºå¯¹åº”çš„å­—ç¬¦ä¸²
         void show(int resId);
 
     }

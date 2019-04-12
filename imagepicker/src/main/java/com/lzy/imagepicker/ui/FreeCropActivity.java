@@ -47,7 +47,7 @@ public class FreeCropActivity extends ImageBaseActivity implements View.OnClickL
 
         mCropImageView = findViewById(R.id.freeCropImageView);
 
-        //初始化View
+        //鍒濆鍖朧iew
         findViewById(R.id.btn_back).setOnClickListener(this);
         Button btn_ok = findViewById(R.id.btn_ok);
         btn_ok.setText(getString(R.string.ip_complete));
@@ -104,14 +104,14 @@ public class FreeCropActivity extends ImageBaseActivity implements View.OnClickL
         @Override
         public void onSuccess(Uri outputUri) {
             mLoadingBox.setVisibility(View.GONE);
-            //裁剪后替换掉返回数据的内容，但是不要改变全局中的选中数据
+            //瑁佸壀鍚庢浛鎹㈡帀杩斿洖鏁版嵁鐨勫唴瀹癸紝浣嗘槸涓嶈鏀瑰彉鍏ㄥ眬涓殑閫変腑鏁版嵁
             mImageItems.remove(0);
             ImageItem imageItem = new ImageItem();
             imageItem.path = croppedPath;
             mImageItems.add(imageItem);
             Intent intent = new Intent();
             intent.putExtra(ImagePicker.EXTRA_RESULT_ITEMS, mImageItems);
-            setResult(ImagePicker.RESULT_CODE_ITEMS, intent);   //单选不需要裁剪，返回数据
+            setResult(ImagePicker.RESULT_CODE_ITEMS, intent);   //鍗曢�変笉闇�瑕佽鍓紝杩斿洖鏁版嵁
             finish();
         }
 
